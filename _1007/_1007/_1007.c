@@ -22,7 +22,7 @@ int* getConcatenation(int* nums, int numsSize, int* returnSize)
 
 	nums = ans;
 
-	for (int i = 0; i < 2 * numsSize; i++)
+	for (int i = 0; i < numsSize; i++)
 	{
 		nums[numsSize + i] = nums[i];
 	}
@@ -58,6 +58,11 @@ int main()
 	{
 		printf("%d ", ret[i]);
 	}
+
+
+
+	free(ret);
+	ret = NULL;
 
 	return 0;
 }
