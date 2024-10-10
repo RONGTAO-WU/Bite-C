@@ -11,40 +11,38 @@
 //	printf("%d\n", ret);
 //}
 
-void _atoi(char* arr)
+int _atoi(char* arr)
 {
-	int* p = 0;
-	int flag = 0;
+	int flag = 1;
+	int num = 0;
 
-	if (*arr == '\0' || *arr == NULL)
+	if (*arr == '\0' || *arr == NULL)			// 为零或者为空
 		return 0;
 
-	while (*arr == " ")							// 跳过空白字符
-		arr++;
-
-	while (*arr++)
+	
+	while(*arr)									// 跳过不属于数字的字符	 -- isspace(arr)
 	{
-		if (*arr >= '0' && *arr <= '9')				// 记住第一次数字的位置
-		{
-			p = arr;
+		if (*arr >= '0' && *arr <= '9')
 			break;
-		}
-	}
-
-	int* pa = p;
-
-	while (p++)
-	{
-		if (*p >= '0' && *p <= '9')
-			flag++;
 		else
-			break;
+			arr++;
 	}
 
-	for (int i = 0; i < flag; i++)
+	if (*arr == '\0')							// 为零说明数组中不存在数字
+		return 0;
+		
+
+	while (*arr >= '0' && *arr <= '9')			// isdigit(arr)
 	{
-		printf("%d", *(pa + i));
+		if (*(arr - 1) == '-')					// 判断数字前是否带负号，默认正号
+		{
+			flag = -1;
+		}
+
+		num = num * 10 + (*arr - 48);
+		arr++;
 	}
+	return flag * num;
 
 }
 
@@ -54,7 +52,11 @@ int main()
 
 	gets(arr);
 
-	_atoi(arr);
+	int ret = _atoi(arr);
+
+	printf("%d", ret);
 
 	return 0;
 }
+
+
